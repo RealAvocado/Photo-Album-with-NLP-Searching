@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Photo Album</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<div class="heading">
+    <h1>
+        AI Photo Album
+    </h1>
+</div>
+
+<div class="container">
+    <!-- Upload  -->
+    <div class="upload-form">
+        <h3>Upload Photo</h3>
+        <form id="uploadForm">
+            <input type="file" id="photoUpload" accept="image/*">
+            <button onclick=uploadImage() class="button"> Upload </button>
+        </form>
+    </div>
+    
+    <!-- Search  -->
+    <div class="search-form">
+        <h3>Search Photos</h3>
+        <form id="searchForm">
+            <div class="input-container">
+                <input type="text" id="searchQuery" placeholder="Enter search keywords">
+                <span><a onclick="searchByVoice()"> <img class="voice" src="images/google-voice.png" title="Search by Voice"></a></span>
+            </div>
+            <button onclick=search() class="button"> Search </button>
+            
+        </form>
+        <div id="searchResults"></div>
+    </div>
+
+    
+</div>
+
+<script>
+    // JavaScript to handle the form submissions will go here
+</script>
+
+</body>
+</html>
