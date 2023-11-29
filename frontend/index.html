@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Photo Album</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<div class="heading">
+    <h1>
+        AI Photo Album
+    </h1>
+</div>
+
+<div class="container">
+    <!-- Upload  -->
+    <div class="upload-form">
+        <h3>Upload Photo</h3>
+        <form id="uploadForm">
+            <input type="file" id="photoUpload" accept="image/*">
+            <input type="text" id="label" placeholder="Enter your customized labels">
+            <button onclick=uploadImage() class="button"> Upload </button>
+        </form>
+    </div>
+    
+    <!-- Search  -->
+    <div class="search-form">
+        <h3>Search Photos</h3>
+        <form id="searchForm">
+            <div class="input-container">
+                <input type="text" id="searchQuery" placeholder="Enter your search query">
+                <span>
+                    <a onclick=searchByVoice()> <img class="voice" src="images/google-voice.png" title="Search by Voice"></a>
+                </span>
+            </div>
+            <button onclick=searchByText() class="button"> Search </button>
+            
+        </form>
+        <div class="container" id="searchResults"></div>
+    </div>
+
+    
+</div>
+    <script src="apiGateway-js-sdk/apigClient.js"></script>  
+    <script src="apiGateway-js-sdk/index.js"></script>    
+    <script type="text/javascript" src="apiGateway-js-sdk/apigClient.js"></script>
+    <script type="module" src="apiGateway-js-sdk/apigClient.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="apiGateway-js-sdk/lib/axios/dist/axios.standalone.js"></script>
+    <script type="text/javascript" src="apiGateway-js-sdk/lib/CryptoJS/rollups/hmac-sha256.js"></script>
+    <script type="text/javascript" src="apiGateway-js-sdk/lib/CryptoJS/rollups/sha256.js"></script>
+    <script type="text/javascript" src="apiGateway-js-sdk/lib/CryptoJS/components/hmac.js"></script>
+    <script type="text/javascript" src="apiGateway-js-sdk/lib/CryptoJS/components/enc-base64.js"></script>
+    <script type="text/javascript" src="apiGateway-js-sdk/lib/url-template/url-template.js"></script>
+    <script type="text/javascript" src="apiGateway-js-sdk/lib/apiGatewayCore/sigV4Client.js"></script>
+    <script type="text/javascript" src="apiGateway-js-sdk/lib/apiGatewayCore/apiGatewayClient.js"></script>
+    <script type="text/javascript" src="apiGateway-js-sdk/lib/apiGatewayCore/simpleHttpClient.js"></script>
+    <script type="text/javascript" src="apiGateway-js-sdk/lib/apiGatewayCore/utils.js"></script>
+
+
+</body>
+</html>
