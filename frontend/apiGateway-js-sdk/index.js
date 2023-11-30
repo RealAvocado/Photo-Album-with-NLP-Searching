@@ -33,6 +33,9 @@ function searchByText(){
     var params = {q: query};
     console.log(params);
 
+    document.getElementById('searchForm').reset();
+
+
     apigClient.searchGet(params, {}, {})
         .then(function(res){
             console.log("success");
@@ -64,16 +67,23 @@ function uploadImage() {
     var filePath = (document.getElementById('photoUpload').value).split('\\');
     var fileName = filePath[filePath.length - 1];
 
-    if(document.getElementById('labels') != ""){
-        var customLabels = document.getElementById('labels').value;
+    var labelsInput = document.getElementById('labels');
+    if(labelsInput && labelsInput.value != ""){
+        var customLabels = labelsInput.value;
+        labelsInput.value = "";
     }
+
     console.log(filePath);
     console.log(fileName);
     console.log(customLabels);
     var reader = new FileReader();
     var file = document.getElementById('photoUpload').files[0];
     console.log('File:', file);
-    document.getElementById('photoUpload').value = "";
+    // document.getElementById('photoUpload').value = "";
+    // document.getElementById('labels').value = "";
+    document.getElementById('uploadForm').reset();
+
+
 
     var params = {
         bucket: 'photo-bucket-2397',
