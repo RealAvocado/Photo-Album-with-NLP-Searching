@@ -17,18 +17,21 @@ function textSearch() {
     if (!searchText.value) {
         alert('Please enter a valid text or voice input.');
     } else {
-        searchText = searchText.value.trim().toLowerCase();
-        console.log('Searching Photos....');
-        searchByText(searchText);
+        // searchText = searchText.value.trim().toLowerCase();
+        // console.log('Searching Photos....');
+        // searchByText(searchText);
+        searchByText();
     }
     
 }
 
 function searchByText(){
-    var searchTerm = document.getElementById("searchQuery").value;
-    document.getElementById('searchResults').innerHTML = "<h4 style=\"text-align:center\">";
+    console.log("triggered searchByText");
+    var query = document.getElementById("searchQuery").value;
+    // document.getElementById('searchResults').innerHTML = "<h4 style=\"text-align:center\">";
 
-    var params = {q: searchTerm};
+    var params = {q: query};
+    console.log(params);
 
     apigClient.searchGet(params, {}, {})
         .then(function(res){
@@ -38,15 +41,15 @@ function searchByText(){
             image_paths = result["data"]["body"]["imagePaths"];
             console.log("image_paths:", image_paths)
 
-            var photoDiv = document.getElementById("searchResult")
-            photosDiv.innerHTML = "";
+            var photoDiv = document.getElementById("searchResults")
+            photoDiv.innerHTML = "";
 
             var n;
             for (n = 0; n < image_paths.length; n++) {
                 images_list = image_paths[n].split('/');
                 imageName = images_list[images_list.length - 1];
 
-                photosDiv.innerHTML += '<figure><img src="' + image_paths[n] + '" style="width:25%"><figcaption>' + imageName + '</figcaption></figure>';
+                photoDiv.innerHTML += '<figure><img src="' + image_paths[n] + '" style="width:25%"><figcaption>' + imageName + '</figcaption></figure>';
             }
 
     }).catch(function(result){
