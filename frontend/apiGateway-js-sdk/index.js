@@ -1,35 +1,40 @@
 var apigClient = apigClientFactory.newClient();
-var SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
 
-
-function searchByVoice() { 
+function searchByVoice() {
+    var SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
     const recognition = new SpeechRecognition();
     recognition.start();
     recognition.onresult = (event) => {
-      const speechToText = event.results[0][0].transcript;
-      console.log(speechToText);
-      document.getElementById("searchQuery").value = speechToText;
-      textSearch();
+        const speechToText = event.results[0][0].transcript;
+        console.log(speechToText);
+        document.getElementById("searchQuery").value = speechToText;
+        //textSearch(); 
     }
-  }
+}
 
 function textSearch() {
     var searchText = document.getElementById('searchQuery');
     if (!searchText.value) {
         alert('Please enter a valid text or voice input.');
     } else {
-        searchText = searchText.value.trim().toLowerCase();
-        console.log('Searching Photos....');
-        searchByText(searchText);
+        // searchText = searchText.value.trim().toLowerCase();
+        // console.log('Searching Photos....');
+        // searchByText(searchText);
+        searchByText();
     }
     
 }
 
 function searchByText(){
-    var searchTerm = document.getElementById("searchQuery").value;
-    document.getElementById('searchResults').innerHTML = "<h4 style=\"text-align:center\">";
+    console.log("triggered searchByText");
+    var query = document.getElementById("searchQuery").value;
+    // document.getElementById('searchResults').innerHTML = "<h4 style=\"text-align:center\">";
 
-    var params = {q: searchTerm};
+    var params = {q: query};
+    console.log(params);
+
+    document.getElementById('searchForm').reset();
+
 
     apigClient.searchGet(params, {}, {})
         .then(function(res){
@@ -39,15 +44,15 @@ function searchByText(){
             image_paths = result["data"]["body"]["imagePaths"];
             console.log("image_paths:", image_paths)
 
-            var photoDiv = document.getElementById("searchResult")
-            photosDiv.innerHTML = "";
+            var photoDiv = document.getElementById("searchResults")
+            photoDiv.innerHTML = "";
 
             var n;
             for (n = 0; n < image_paths.length; n++) {
                 images_list = image_paths[n].split('/');
                 imageName = images_list[images_list.length - 1];
 
-                photosDiv.innerHTML += '<figure><img src="' + image_paths[n] + '" style="width:25%"><figcaption>' + imageName + '</figcaption></figure>';
+                photoDiv.innerHTML += '<figure><img src="' + image_paths[n] + '" style="width:25%"><figcaption>' + imageName + '</figcaption></figure>';
             }
 
     }).catch(function(result){
@@ -58,5 +63,54 @@ function searchByText(){
 
 
 function uploadImage() {
+
+    var filePath = (document.getElementById('photoUpload').value).split('\\');
+    var fileName = filePath[filePath.length - 1];
+
+    var labelsInput = document.getElementById('labels');
+    if(labelsInput && labelsInput.value != ""){
+        var customLabels = labelsInput.value;
+        labelsInput.value = "";
+    }
+
+    console.log(filePath);
+    console.log(fileName);
+    console.log(customLabels);
+    var reader = new FileReader();
+    var file = document.getElementById('photoUpload').files[0];
+    console.log('File:', file);
+    // document.getElementById('photoUpload').value = "";
+    // document.getElementById('labels').value = "";
+    document.getElementById('uploadForm').reset();
+
+
+
+    var params = {
+        bucket: 'photo-bucket-2397',
+        key: fileName,
+        'Content-Type': file.type,
+        'x-amz-meta-customLabels': customLabels
+        
+    };
+
+    // var additionalParams = {
+    //     headers:{
+    //         'x-amz-meta-customLabels': customLabels,
+    //         "Content-Type": "image/jpg"
+    //     }
+    // }
+    reader.readAsBinaryString(file);
+    reader.onload = function(event){
+        body = btoa(event.target.result);
+        console.log('Reader body:', body)
+
+        return apigClient.uploadBucketKeyPut(params, body)
+        .then(function(res){
+            console.log(res);
+        })
+        .catch(function(err){
+            console.log(err);
+        })
+    }
 
 }
