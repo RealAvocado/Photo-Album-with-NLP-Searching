@@ -51,13 +51,11 @@ def lambda_handler(event, context):
 def insert_into_opensearch(json_data, opensearch_endpoint):
     username = 'opensearch-user'
     password = 'h7-VUV21[o87hbtyuR'
-
     headers = {'Content-Type': 'application/json'}
 
     host = opensearch_endpoint
     index = 'photos'
     datatype = '_doc'
-
     url = host + '/' + index + '/' + datatype
 
     response = requests.post(url, auth=HTTPBasicAuth(username, password), headers=headers, json=json_data)
