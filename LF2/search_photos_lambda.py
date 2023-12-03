@@ -6,17 +6,20 @@ from requests.auth import HTTPBasicAuth
 
 
 def lambda_handler(event, context):
-    intent = event['sessionState']['intent']['name']
-    first_photo_search_intent = event['sessionState']['intent']['slots'].get('FirstPhotoIntent', 'null')
-    second_photo_search_intent = event['sessionState']['intent']['slots'].get('SecondPhotoIntent', 'null')
+    intent = event['interpretations'][0]['intent']['name']
 
     search_intents = []
+    photo_URLs = []
     if intent != 'FallbackIntent':
-        search_intents.append(first_photo_search_intent['value']['originalValue'])
-        if second_photo_search_intent != 'null':
-            search_intents.append(second_photo_search_intent['value']['originalValue'])
+        first_photo_search_intent = event['interpretations'][0]['intent']['slots'].get('FirstPhotoIntent')
+        second_photo_search_intent = event['interpretations'][0]['intent']['slots'].get('SecondPhotoIntent')
 
-    photo_URLs = search_OpenSearch_index(search_intents)
+        search_intents.append(first_photo_search_intent['value']['originalValue'])
+        if second_photo_search_intent is None:
+            photo_URLs = search_OpenSearch_index(search_intents)
+        else:
+            search_intents.append(second_photo_search_intent['value']['originalValue'])
+            photo_URLs = search_OpenSearch_index(search_intents)
 
     lex_response = response_to_lex(event, photo_URLs)
     return lex_response
@@ -55,10 +58,10 @@ def search_OpenSearch_index(search_intents):
 def response_to_lex(event, photo_URLs):
     session_id = event['sessionId']
     request_id = event['sessionState']['originatingRequestId']
-    intent = event['sessionState']['intent']['name']
+    intent = event['interpretations'][0]['intent']['name']
     nluConfidence = event['interpretations'][0]['nluConfidence']
-    first_photo_search_intent = event['sessionState']['intent']['slots'].get('FirstPhotoIntent', 'null')
-    second_photo_search_intent = event['sessionState']['intent']['slots'].get('SecondPhotoIntent', 'null')
+    first_photo_search_intent = event['interpretations'][0]['intent']['slots'].get('FirstPhotoIntent')
+    second_photo_search_intent = event['interpretations'][0]['intent']['slots'].get('SecondPhotoIntent')
 
     # client = boto3.client('lexv2-runtime')
 
@@ -67,11 +70,10 @@ def response_to_lex(event, photo_URLs):
 
     # no intent is recgonized
     if intent == 'FallbackIntent':
-
         return {
             "sessionState": {
                 "dialogAction": {
-                    "type": "Close"
+                    "type": "Delegate"
                 },
                 "intent": {
                     "name": "FallbackIntent",
@@ -100,7 +102,7 @@ def response_to_lex(event, photo_URLs):
                         "name": "PhotoSearchIntent",
                         "slots": {
                             "FirstPhotoIntent": None,
-                            "SecondPhototIntent": None
+                            "SecondPhotoIntent": None
                         }
                     },
                     "interpretationSource": "Lex"
@@ -111,16 +113,17 @@ def response_to_lex(event, photo_URLs):
         }
 
     # only the first slot is fullfilled
-    if first_photo_search_intent != 'null' and second_photo_search_intent == 'null':
+    if not (first_photo_search_intent is None) and (second_photo_search_intent is None):
         i = 1
         for url in photo_URLs:
             key = 'photo' + str(i)
             requestAttributes[key] = url
+            i = i + 1
 
         return {
             "sessionState": {
                 "dialogAction": {
-                    "type": "Close"
+                    "type": "Delegate"
                 },
                 "intent": {
                     "name": "PhotoSearchIntent",
@@ -134,9 +137,9 @@ def response_to_lex(event, photo_URLs):
                                 ]
                             }
                         },
-                        "SecondPhototIntent": None
+                        "SecondPhotoIntent": None
                     },
-                    "state": "Failed",
+                    "state": "ReadyForFulfillment",
                     "confirmationState": "None"
                 },
                 "sessionAttributes": {},
@@ -159,9 +162,9 @@ def response_to_lex(event, photo_URLs):
                                     ]
                                 }
                             },
-                            "SecondPhototIntent": None
+                            "SecondPhotoIntent": None
                         },
-                        "state": "Failed",
+                        "state": "ReadyForFulfillment",
                         "confirmationState": "None"
                     },
                     "interpretationSource": "Lex"
@@ -179,16 +182,17 @@ def response_to_lex(event, photo_URLs):
         }
 
     # both the first and second slot are fullfilled
-    elif first_photo_search_intent != 'null' and second_photo_search_intent != 'null':
+    elif not (first_photo_search_intent is None) and not (second_photo_search_intent is None):
         i = 1
         for url in photo_URLs:
             key = 'photo' + str(i)
             requestAttributes[key] = url
+            i = i + 1
 
         return {
             "sessionState": {
                 "dialogAction": {
-                    "type": "Close"
+                    "type": "Delegate"
                 },
                 "intent": {
                     "name": "PhotoSearchIntent",
@@ -202,7 +206,7 @@ def response_to_lex(event, photo_URLs):
                                 ]
                             }
                         },
-                        "SecondPhototIntent": {
+                        "SecondPhotoIntent": {
                             "value": {
                                 "originalValue": second_photo_search_intent['value']['originalValue'],
                                 "interpretedValue": second_photo_search_intent['value']['originalValue'],
@@ -212,7 +216,7 @@ def response_to_lex(event, photo_URLs):
                             }
                         }
                     },
-                    "state": "Failed",
+                    "state": "ReadyForFulfillment",
                     "confirmationState": "None"
                 },
                 "sessionAttributes": {},
@@ -235,7 +239,7 @@ def response_to_lex(event, photo_URLs):
                                     ]
                                 }
                             },
-                            "SecondPhototIntent": {
+                            "SecondPhotoIntent": {
                                 "value": {
                                     "originalValue": second_photo_search_intent['value']['originalValue'],
                                     "interpretedValue": second_photo_search_intent['value']['originalValue'],
@@ -245,7 +249,7 @@ def response_to_lex(event, photo_URLs):
                                 }
                             }
                         },
-                        "state": "Failed",
+                        "state": "ReadyForFulfillment",
                         "confirmationState": "None"
                     },
                     "interpretationSource": "Lex"
