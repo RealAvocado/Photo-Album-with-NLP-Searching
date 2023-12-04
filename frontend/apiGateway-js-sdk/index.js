@@ -41,8 +41,9 @@ function searchByText(){
             console.log("success");
             console.log("Result: ",res);
             
-            image_paths = result["data"]["body"]["imagePaths"];
-            console.log("image_paths:", image_paths)
+            //image_paths = res["data"]["body"]["url"];
+            image_paths = res.data
+            console.log("image_paths:", image_paths[0])
 
             var photoDiv = document.getElementById("searchResults")
             photoDiv.innerHTML = "";
@@ -50,9 +51,7 @@ function searchByText(){
             var n;
             for (n = 0; n < image_paths.length; n++) {
                 images_list = image_paths[n].split('/');
-                imageName = images_list[images_list.length - 1];
-
-                photoDiv.innerHTML += '<figure><img src="' + image_paths[n] + '" style="width:25%"><figcaption>' + imageName + '</figcaption></figure>';
+                photoDiv.innerHTML += '<figure><img src="' + image_paths[n] + '"style="width:50%"></figure>';
             }
 
     }).catch(function(result){
