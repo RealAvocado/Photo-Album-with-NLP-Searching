@@ -1,5 +1,6 @@
 var apigClient = apigClientFactory.newClient();
 
+//voice to text
 function searchByVoice() {
     var SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
     const recognition = new SpeechRecognition();
@@ -8,27 +9,24 @@ function searchByVoice() {
         const speechToText = event.results[0][0].transcript;
         console.log(speechToText);
         document.getElementById("searchQuery").value = speechToText;
-        //textSearch(); 
     }
 }
 
+//text search check
 function textSearch() {
     var searchText = document.getElementById('searchQuery');
     if (!searchText.value) {
         alert('Please enter a valid text or voice input.');
     } else {
-        // searchText = searchText.value.trim().toLowerCase();
-        // console.log('Searching Photos....');
-        // searchByText(searchText);
         searchByText();
     }
     
 }
 
+//search by text and receive url
 function searchByText(){
     console.log("triggered searchByText");
     var query = document.getElementById("searchQuery").value;
-    // document.getElementById('searchResults').innerHTML = "<h4 style=\"text-align:center\">";
 
     var params = {q: query};
     console.log(params);
@@ -41,8 +39,8 @@ function searchByText(){
             console.log("success");
             console.log("Result: ",res);
             
-            image_paths = result["data"]["body"]["imagePaths"];
-            console.log("image_paths:", image_paths)
+            image_paths = res.data
+            console.log("image_paths:", image_paths[0])
 
             var photoDiv = document.getElementById("searchResults")
             photoDiv.innerHTML = "";
@@ -50,9 +48,7 @@ function searchByText(){
             var n;
             for (n = 0; n < image_paths.length; n++) {
                 images_list = image_paths[n].split('/');
-                imageName = images_list[images_list.length - 1];
-
-                photoDiv.innerHTML += '<figure><img src="' + image_paths[n] + '" style="width:25%"><figcaption>' + imageName + '</figcaption></figure>';
+                photoDiv.innerHTML += '<figure><img src="' + image_paths[n] + '"style="width:50%"></figure>';
             }
 
     }).catch(function(result){
@@ -61,9 +57,8 @@ function searchByText(){
     });
 }
 
-
+// upload image to S3
 function uploadImage() {
-
     var filePath = (document.getElementById('photoUpload').value).split('\\');
     var fileName = filePath[filePath.length - 1];
 
@@ -79,8 +74,6 @@ function uploadImage() {
     var reader = new FileReader();
     var file = document.getElementById('photoUpload').files[0];
     console.log('File:', file);
-    // document.getElementById('photoUpload').value = "";
-    // document.getElementById('labels').value = "";
     document.getElementById('uploadForm').reset();
 
 
@@ -93,12 +86,6 @@ function uploadImage() {
         
     };
 
-    // var additionalParams = {
-    //     headers:{
-    //         'x-amz-meta-customLabels': customLabels,
-    //         "Content-Type": "image/jpg"
-    //     }
-    // }
     reader.readAsBinaryString(file);
     reader.onload = function(event){
         body = btoa(event.target.result);
