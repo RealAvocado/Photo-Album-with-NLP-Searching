@@ -39,14 +39,16 @@ def search_OpenSearch_index(search_intents):
 
     username = 'opensearch-user'
     password = 'h7-VUV21[o87hbtyuR'
-    host = 'https://search-photos-a2wikxciocdgnhqczvcuy6zzqa.us-east-1.es.amazonaws.com'
     index = 'photos'
+    host = 'https://search-photos-a2wikxciocdgnhqczvcuy6zzqa.us-east-1.es.amazonaws.com'
+
     search_url_base = host + '/' + index + '/' + '_search?q='
 
     for intent in search_intents:
         search_url = search_url_base + intent
         response = requests.get(search_url, auth=HTTPBasicAuth(username, password))
         print(response)
+        # ============! ATTENTION !===========================
         response = json.loads(response.content.decode('utf-8'))
 
         for hit in response['hits']['hits']:
