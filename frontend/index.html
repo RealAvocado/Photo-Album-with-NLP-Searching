@@ -34,8 +34,12 @@
         <h3>Upload Photo</h3>
         <form id="uploadForm">
             <input type="file" id="photoUpload" accept="image/*">
-            <input type="text" id="labels" placeholder="Enter your customized label">
+            <input type="text" id="labels" placeholder="Enter your customized label, separated by comma">
             <button onclick="uploadImage()" class="button" type="button"> Upload </button>
+            <br>
+            <div>
+                <h5> <a href="https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/limits.html"> Click here to check image dimensions supported </a></h5>  
+            </div>
         </form>
     </div>
     

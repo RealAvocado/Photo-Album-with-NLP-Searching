@@ -47,6 +47,9 @@ function searchByText(){
             var photoDiv = document.getElementById("searchResults");
             photoDiv.innerHTML = "";
 
+            if (image_paths.length == 0) {
+                photoDiv.innerHTML += '<h5 style="color: red;"> No such result, please try again </h5>';
+            }
             var n;
             for (n = 0; n < image_paths.length; n++) {
                 images_list = image_paths[n].split('/');
