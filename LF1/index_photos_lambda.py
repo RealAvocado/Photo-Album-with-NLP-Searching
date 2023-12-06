@@ -84,30 +84,3 @@ def delete_old_photo_with_same_name(opensearch_endpoint, username, password, ind
         document_id = response['hits']['hits'][0]['_id']
         delete_url = opensearch_endpoint + '/' + index + '/' + '_doc' + '/' + document_id
         delete_response = requests.delete(delete_url, auth=HTTPBasicAuth(username, password))
-
-
-{
-    'ResponseMetadata':
-     {
-        'RequestId': 'AQCCDS58SV29GRP9',
-        'HostId': 'Ao23PzICP0iu01BvK+K3Lro0F86P95DGCp8iz5yLqVSJdbyTvt0d9Vw6Ia2PUsr1hjSxyN7La+4=',
-        'HTTPStatusCode': 200, 'HTTPHeaders': {
-        'x-amz-id-2': 'Ao23PzICP0iu01BvK+K3Lro0F86P95DGCp8iz5yLqVSJdbyTvt0d9Vw6Ia2PUsr1hjSxyN7La+4=',
-        'x-amz-request-id': 'AQCCDS58SV29GRP9', 'date': 'Tue, 05 Dec 2023 19:36:17 GMT',
-        'last-modified': 'Tue, 05 Dec 2023 19:36:09 GMT', 'etag': '"368ea2e110e2776ece6a019c63dd28d0"',
-        'x-amz-server-side-encryption': 'AES256', 'x-amz-meta-customlabels': 'cute&fat', 'accept-ranges': 'bytes',
-        'content-type': 'image/jpeg', 'server': 'AmazonS3', 'content-length': '51937'
-     },
-      'RetryAttempts': 0
-      },
-    'AcceptRanges': 'bytes',
-    'LastModified': datetime.datetime(2023, 12, 5, 19, 36, 9, tzinfo=tzutc()),
-    'ContentLength': 51937,
-    'ETag': '"368ea2e110e2776ece6a019c63dd28d0"',
-    'ContentType': 'image/jpeg',
-    'ServerSideEncryption': 'AES256',
-    'Metadata':
-        {
-            'customlabels': 'cute&fat'
-        }
- }
