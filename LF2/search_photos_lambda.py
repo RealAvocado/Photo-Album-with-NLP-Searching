@@ -38,7 +38,7 @@ def search_OpenSearch_index(search_intents):
     photo_URLs = []
 
     username = 'opensearch-user'
-    password = 'h7-VUV21[o87hbtyuR'
+    password = '***************'
     index = 'photos'
     host = 'https://search-photos-a2wikxciocdgnhqczvcuy6zzqa.us-east-1.es.amazonaws.com'
 

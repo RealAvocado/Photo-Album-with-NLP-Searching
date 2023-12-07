@@ -12,7 +12,7 @@ def lambda_handler(event, context):
 
     opensearch_endpoint = "https://search-photos-a2wikxciocdgnhqczvcuy6zzqa.us-east-1.es.amazonaws.com"
     username = 'opensearch-user'
-    password = 'h7-VUV21[o87hbtyuR'
+    password = '***************'
 
     for record in event['Records']:
         bucket = record['s3']['bucket']['name']
