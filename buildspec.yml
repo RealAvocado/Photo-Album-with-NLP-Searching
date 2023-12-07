@@ -12,7 +12,8 @@ phases:
     commands:
       - echo "Zipping deployment package..."
       - cd lib
-      - zip -r9 ../deployment_package.zip .
+      - zip -r9 ../LF1_deployment_package.zip .
+      - zip -r9 ../LF2_deployment_package.zip .
       - cd ..
       - zip -g LF1_deployment_package.zip ./LF1/index_photos_lambda.py
       - zip -g LF2_deployment_package.zip ./LF2/search_photos_lambda.py
