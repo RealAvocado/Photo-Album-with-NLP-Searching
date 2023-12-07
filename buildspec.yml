@@ -21,6 +21,6 @@ phases:
       - echo "Updating lambda function..."
       - aws lambda update-function-code --function-name LF1-index-photos-py --zip-file fileb://deployment_package.zip
 
-  artifacts:
-    files:
-      - '**/*'
+artifacts:
+  files:
+    - '**/*'
