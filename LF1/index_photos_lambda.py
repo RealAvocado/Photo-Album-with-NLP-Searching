@@ -10,7 +10,7 @@ def lambda_handler(event, context):
     s3 = boto3.client('s3', region_name='us-east-1')
     rekognition = boto3.client('rekognition', region_name='us-east-1')
 
-    opensearch_endpoint = "https://search-photos-a2wikxciocdgnhqczvcuy6zzqa.us-east-1.es.amazonaws.com"
+    opensearch_endpoint = "https://search-**************.us-east-1.es.amazonaws.com"
     username = 'opensearch-user'
     password = '***************'
 
