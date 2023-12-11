@@ -1,4 +1,29 @@
+<a name="readme-top"></a>
 # Photo Album with NLP Searching
+
+## About The Project
+This is a photo album web application, that can be searched using natural language through both text and voice. Everytime users upload a photo, features and labels inside the photo will be detected and stored. When the user later search these labels in this album, relevant photos with corresponding features will come up.
+
+### Built With
+This project mainly used services provided by AWS.
+
+1. S3
+2. API Gateway
+3. Lambda Function
+4. Lex V2
+5. OpenSearch
+6. Rekognition
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### Project Architechture Diagram
+![Architecture](./images_for_README/Architecture_Diagram.png)
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Usage
+Video Demo: [https://youtu.be/Xep-HgO3IYk](https://youtu.be/Xep-HgO3IYk "Video Demo")
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ## AWS CodePipeline Implementation Steps
 ### Lambda Functions:
 ##### Step 1: Choose pipeline settings
@@ -27,3 +52,47 @@ In this step, I choose S3 as the deploy provider. Before continuing, create a S3
 ##### Testing
 After the above steps are finished, you should be able to see the stage of source, build and deploy succeed after you push a commit to the repository selected in step 2.
 ![CodePipeline_Success_Page](./images_for_README/CodePipeline/CodePipeline_Success_Page.png)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONTRIBUTING -->
+## Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- CONTACT -->
+## Contact
+
+Letian Jiang (Email: lj2397@nyu.edu)
+
+Shihui Huang (Email: sh4480@nyu.edu)
+
+Project Link: [Photo Album with NLP Searching](http://photo-album-webpage.s3-website-us-east-1.amazonaws.com/)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- ACKNOWLEDGMENTS -->
+## Acknowledgments
+
+The following recourses helped me to complete this project.
+
+* [AWS Doc](https://docs.aws.amazon.com/)
+* [Former2](https://github.com/iann0036/former2)
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
