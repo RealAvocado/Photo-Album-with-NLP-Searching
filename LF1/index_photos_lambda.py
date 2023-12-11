@@ -34,7 +34,6 @@ def lambda_handler(event, context):
 
         # Step ii: Retrieve metadata
         metadata = s3.head_object(Bucket=bucket, Key=key)
-        sys.stdout.write(str(metadata))
         custom_labels = metadata['Metadata'].get('customlabels', None)
 
         # Combine labels from Rekognition and custom labels
