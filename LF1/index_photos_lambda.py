@@ -5,7 +5,6 @@ import requests
 from datetime import datetime
 from requests.auth import HTTPBasicAuth
 
-
 def lambda_handler(event, context):
     s3 = boto3.client('s3', region_name='us-east-1')
     rekognition = boto3.client('rekognition', region_name='us-east-1')
