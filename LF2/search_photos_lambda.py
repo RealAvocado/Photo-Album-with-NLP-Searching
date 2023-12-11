@@ -1,12 +1,14 @@
 import json
 import boto3
 import requests
+import sys
 
 from requests.auth import HTTPBasicAuth
 
 lexbot = boto3.client('lexv2-runtime')
 
 def lambda_handler(event, context):
+    #sys.stdout.write(str(event)) # debug in CloudWatch
     search_intents = []
     query = event['queryStringParameters']['q']
     response_from_lex = lexbot.recognize_text(
