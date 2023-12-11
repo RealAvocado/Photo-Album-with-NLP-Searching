@@ -8,7 +8,7 @@ lexbot = boto3.client('lexv2-runtime')
 
 def lambda_handler(event, context):
     search_intents = []
-    query = event['queryStringParameters']['q']
+    query = event['q']
     response_from_lex = lexbot.recognize_text(
         botId='4IGQQYF4KC',
         botAliasId='TSTALIASID',
