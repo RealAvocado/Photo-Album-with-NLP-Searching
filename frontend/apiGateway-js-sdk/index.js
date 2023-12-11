@@ -80,6 +80,12 @@ function uploadImage() {
     console.log('File:', file);
     document.getElementById('uploadForm').reset();
 
+     //Check if the file size first is smaller than 4MB
+     if(file.size > 4*1024*1024){
+        alert('This image is too large. Please upload an image smaller than 4MB.');
+        return;
+    }
+
     var params = {
         bucket: 'photo-bucket-2397',
         key: fileName,
