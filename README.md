@@ -1,5 +1,6 @@
 <a name="readme-top"></a>
 # Photo Album with NLP Searching
+Project Link: [Photo Album with NLP Searching](http://photo-album-webpage.s3-website-us-east-1.amazonaws.com/)
 
 ## About The Project
 This is a photo album web application, that can be searched using natural language through both text and voice. Everytime users upload a photo, features and labels inside the photo will be detected and stored. When the user later search these labels in this album, relevant photos with corresponding features will come up.
@@ -80,7 +81,6 @@ Letian Jiang (Email: lj2397@nyu.edu)
 
 Shihui Huang (Email: sh4480@nyu.edu)
 
-Project Link: [Photo Album with NLP Searching](http://photo-album-webpage.s3-website-us-east-1.amazonaws.com/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
