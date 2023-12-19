@@ -7,12 +7,12 @@ This is a photo album web application, that can be searched using natural langua
 ### Built With
 This project mainly used services provided by AWS.
 
-1. S3
-2. API Gateway
-3. Lambda Function
-4. Lex V2
-5. OpenSearch
-6. Rekognition
+1. [S3](https://aws.amazon.com/s3/)
+2. [API Gateway](https://aws.amazon.com/api-gateway/)
+3. [Lambda](https://aws.amazon.com/lambda/)
+4. [Lex](https://aws.amazon.com/lex/)
+5. [OpenSearch](https://aws.amazon.com/opensearch-service/)
+6. [Rekognition](https://aws.amazon.com/rekognition/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -20,8 +20,40 @@ This project mainly used services provided by AWS.
 ![Architecture](./images_for_README/Architecture_Diagram.png)
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+### Natural Language Searching
+The function of photo searching via natural language is implemented with Amazon Lex.
+
+Here're the steps:
+
+1. Create a Lex bot in AWS console (Using Lex V2 is highly recommended)
+2. Create an intent in the bot
+3. Add training utterances to the intent, such that the bot can pick up both keyword searches (“trees”, “birds”), as well as sentence searches (“show me trees”, “show me photos with trees and birds in them”). Use two slots 'FirstPhotoIntent' and 'SecondPhotoIntent' to capture the keywords entered by users. 
+4. Check the option 'Required for this intent' for the first slot only.
+
+<center>
+![Lex_Utterances](./images_for_README/Lex_utterances.png)
+##### Lex Utterances
+
+![Lex_Slots](./images_for_README/lex_slots.png)
+##### Slots
+</center>
+
+
 ## Usage
-Video Demo: [https://youtu.be/Xep-HgO3IYk](https://youtu.be/Xep-HgO3IYk "Video Demo")
+1. Check the image restriction of Rekognition. Make sure your images is supported by Rekognition.
+2. Choose the photo you want to upload and add custom labels if you want. Click 'upload' to upload.
+3. After the photo is uploaded, Rekognition will analyze it and generate labels for it. The labels of photos are stored in the OpenSearch index.
+4. Query photos according to utterances in Lex bot. Results will apear at the bottom.
+##### Video Demo: [https://youtu.be/Xep-HgO3IYk](https://youtu.be/Xep-HgO3IYk "Video Demo")
+
+<center>
+![WebPage](./images_for_README/WebPage.png)
+##### Album Interface
+![Labels](./images_for_README/labels_in_opensearch.png)
+##### Labels of Photos
+![Query_Example](./images_for_README/query_example.png)
+##### Query Example
+</center>
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## AWS CodePipeline Implementation Steps
