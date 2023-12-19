@@ -31,12 +31,19 @@ Here're the steps:
 3. Add training utterances to the intent, such that the bot can pick up both keyword searches (“trees”, “birds”), as well as sentence searches (“show me trees”, “show me photos with trees and birds in them”). Use two slots 'FirstPhotoIntent' and 'SecondPhotoIntent' to capture the keywords entered by users. 
 4. Check the option 'Required for this intent' for the first slot only.
 
-![Lex_Utterances](./images_for_README/Lex_utterances.png)
-##### Lex Utterances
+<p align="center">
+  <img src="./images_for_README/Lex_utterances.png">
+</p>
+<p align="center">
+  Lex Utterances
+</p>
 
-![Lex_Slots](./images_for_README/lex_slots.png)
-##### Slots
-
+<p align="center">
+  <img src="./images_for_README/lex_slots.png">
+</p>
+<p align="center">
+  Slots
+</p>
 
 
 ## Usage
@@ -47,11 +54,19 @@ Here're the steps:
 ##### Video Demo: [https://youtu.be/Xep-HgO3IYk](https://youtu.be/Xep-HgO3IYk "Video Demo")
 
 ![WebPage](./images_for_README/WebPage.png)
-##### Album Interface
+<p align="center">
+  Album Interface
+</p>
+
 ![Labels](./images_for_README/labels_in_opensearch.png)
-##### Labels of Photos
+<p align="center">
+  Labels of Photos
+</p>
+
 ![Query_Example](./images_for_README/query_example.png)
-##### Query Example
+<p align="center">
+  Query Example
+</p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
