@@ -31,13 +31,14 @@ Here're the steps:
 3. Add training utterances to the intent, such that the bot can pick up both keyword searches (“trees”, “birds”), as well as sentence searches (“show me trees”, “show me photos with trees and birds in them”). Use two slots 'FirstPhotoIntent' and 'SecondPhotoIntent' to capture the keywords entered by users. 
 4. Check the option 'Required for this intent' for the first slot only.
 
-<center>
+<div style="text-align:center;">
 ![Lex_Utterances](./images_for_README/Lex_utterances.png)
 ##### Lex Utterances
 
 ![Lex_Slots](./images_for_README/lex_slots.png)
 ##### Slots
-</center>
+</div>
+
 
 
 ## Usage
@@ -47,14 +48,15 @@ Here're the steps:
 4. Query photos according to utterances in Lex bot. Results will apear at the bottom.
 ##### Video Demo: [https://youtu.be/Xep-HgO3IYk](https://youtu.be/Xep-HgO3IYk "Video Demo")
 
-<center>
+<div style="text-align:center;">
 ![WebPage](./images_for_README/WebPage.png)
 ##### Album Interface
 ![Labels](./images_for_README/labels_in_opensearch.png)
 ##### Labels of Photos
 ![Query_Example](./images_for_README/query_example.png)
 ##### Query Example
-</center>
+</div>
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## AWS CodePipeline Implementation Steps
