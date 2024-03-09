@@ -1,5 +1,5 @@
 <a name="readme-top"></a>
-# Photo Album with NLP Searching
+# Photo Album with Natural Language Searching
 Project Link: [AI Photo Album Website](http://photo-album-webpage.s3-website-us-east-1.amazonaws.com/)
 
 ## About The Project
